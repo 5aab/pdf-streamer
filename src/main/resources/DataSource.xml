@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DATASOURCE>
+    <source name="car" type="database">
+        <column name="name" label="name" type="String"/>
+        <column name="id" label="id" type="String"/>
+        <column name="color" label="color" type="String"/>
+        <column name="seats" label="seats" type="String"/>
+        <column name="capacity" label="capacity" type="String"/>
+        <column name="engine" label="engine" type="String"/>
+        <column name="power" label="power" type="String"/>
+        <column name="mileage" label="mileage" type="String"/>
+        <column name="max_speed" label="max_speed" type="String"/>
+        <column name="sound_system" label="sound_system" type="String"/>
+        <column name="owner_name" label="owner_name" type="String"/>
+        <column name="insurance_id" label="insurance_id" type="String"/>
+        <column name="showroom_price" label="showroom_price" type="String"/>
+        <column name="on_road_price" label="on_road_price" type="String"/>
+
+        <connection type="databaseConnection">
+            <jdbcUrl></jdbcUrl>
+            <userId></userId>
+            <password></password>
+        </connection>
+    </source>
+    <source name="insurance" type="rest">
+        <column name="name" label="name" type="String"/>
+        <column name="id" label="id" type="String"/>
+		<column name="type" label="insurance_type" type="String"/>
+        <column name="cost" label="cost" type="String"/>
+        <column name="expiry" label="expiry" type="String"/>
+		<column name="insuredBy" label="insuredBy" type="String"/>
+		<column name="insuredOn" label="insuredOn" type="String"/>
+        <column name="starts_on" label="starts_on" type="String"/>
+        <column name="cover_plastic_items" label="cover_plastic_items" type="String"/>
+        <column name="cover_glass_items" label="cover_glass_items" type="String"/>
+        <column name="cover_interior_items" label="cover_interior_items" type="String"/>
+        <connection type="restConnection">
+            <url>http://localhost:9090/insurance/query</url>
+            <userId></userId>
+            <password></password>
+            <authType></authType>
+        </connection>
+    </source>
+    <joins>
+        <join fromSource="car" toSource="insurance" fromColumn="insurance_id" toColumn="id"/>
+    </joins>
+    <compose>
+        <composedColumns sourceName="car" name="name" label="car_name" type="String"/>
+        <composedColumns sourceName="car" name="id" label="id" type="String"/>
+        <composedColumns sourceName="car" name="color" label="color" type="String"/>
+        <composedColumns sourceName="car" name="seats" label="seats" type="String"/>
+        <composedColumns sourceName="car" name="capacity" label="capacity" type="String"/>
+        <composedColumns sourceName="car" name="engine" label="engine" type="String"/>
+        <composedColumns sourceName="car" name="power" label="power" type="String"/>
+        <composedColumns sourceName="insurance" name="name" label="insurance_name" type="String"/>
+        <composedColumns sourceName="insurance" name="id" label="id" type="String"/>
+        <composedColumns sourceName="insurance" name="cost" label="cost" type="String"/>
+        <composedColumns sourceName="insurance" name="expiry" label="expiry" type="String"/>
+    </compose>
+</DATASOURCE>
